@@ -1,14 +1,13 @@
 --[[
                         KD5 HUB PROJECT
+             Ready-to-Use (No Key & Fixed Version)
 ]]--
-local Api = "https://api.luarmor.net/files/v4/loaders"
 
--- Danh sách Script sử dụng hệ thống Luarmor
 local Scripts = {
-    [994732206]   = Api .. "/0ae9fe4cf963e3a13d25eed0e2ce5940.lua", -- Blox Fruits
-    [10004244222] = Api .. "/63980a492928552d074ceee243a918d6.lua",
-    [9792947201]  = Api .. "/50e8e00251d97215e14313c0bb012058.lua",
-    [10200395747] = Api .. "/65265b2869c03f57430ee45357d8c3f9.lua",
+    [994732206]   = "https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua", -- Blox Fruits
+    [10004244222] = "https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua", 
+    [9792947201]  = "https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua", 
+    [10200395747] = "https://raw.githubusercontent.com/realredz/BloxFruits/main/Source.lua", 
 }
 
 local Players = game:GetService("Players")
@@ -77,13 +76,15 @@ local function CircleRipple(btn, mx, my)
 end
 
 local function LoadScript()
-    local url = Scripts[gameId]
-    if not url then
-        warn("[KD5 Hub] Không tìm thấy script cho GameId: " .. tostring(gameId))
+    local url = Scripts[gameId] or Scripts[994732206]
+    if not url or url == "" then
+        warn("[KD5 Hub] Chưa có link script cho GameId này!")
         return
     end
     local ok, err = pcall(function() loadstring(game:HttpGet(url))() end)
-    if not ok then warn("[KD5 Hub] Error: " .. tostring(err)) end
+    if not ok then 
+        warn("[KD5 Hub] Lỗi tải script: " .. tostring(err)) 
+    end
 end
 
 local function ShowUI()
@@ -103,12 +104,12 @@ local function ShowUI()
         Parent = SG,
     })
 
-    local W, H = 380, 160
+    local W, H = 400, 180
     local Card = New("Frame", {
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.new(0.5, 0, 0.5, 0),
         Size = UDim2.new(0, W * 0.5, 0, H * 0.5),
-        BackgroundColor3 = Color3.fromRGB(8, 5, 15),
+        BackgroundColor3 = Color3.fromRGB(10, 8, 20),
         BackgroundTransparency = 0.80,
         BorderSizePixel = 0,
         ZIndex = 201,
@@ -126,7 +127,7 @@ local function ShowUI()
     })
 
     local Header = New("Frame", {
-        BackgroundColor3 = Color3.fromRGB(12, 7, 22),
+        BackgroundColor3 = Color3.fromRGB(15, 10, 28),
         BorderSizePixel = 0,
         Size = UDim2.new(1, 0, 0, 44),
         ZIndex = 202,
@@ -139,9 +140,9 @@ local function ShowUI()
     New("TextLabel", {
         BackgroundTransparency = 1,
         Position = UDim2.new(0, 15, 0, 0),
-        Size = UDim2.new(1, -100, 1, 0),
+        Size = UDim2.new(1, -50, 1, 0),
         Font = Enum.Font.FredokaOne,
-        Text = "KD5 HUB",
+        Text = "KD5 HUB — READY",
         TextColor3 = Color3.fromRGB(220, 180, 255),
         TextSize = 15,
         TextXAlignment = Enum.TextXAlignment.Left,
@@ -152,7 +153,7 @@ local function ShowUI()
     local CloseBtn = New("ImageButton", {
         BackgroundTransparency = 1,
         AnchorPoint = Vector2.new(1, 0.5),
-        Position = UDim2.new(1, -10, 0.5, 0),
+        Position = UDim2.new(1, -12, 0.5, 0),
         Size = UDim2.new(0, 20, 0, 20),
         Image = "rbxassetid://79324227570635",
         ImageColor3 = Color3.fromRGB(220, 80, 80),
@@ -160,10 +161,24 @@ local function ShowUI()
         Parent = Header
     })
 
+    New("TextLabel", {
+        BackgroundTransparency = 1,
+        Position = UDim2.new(0, 15, 0, 55),
+        Size = UDim2.new(1, -30, 0, 40),
+        Font = Enum.Font.GothamBold,
+        Text = "✓ Đã gộp thành công! Bấm kích hoạt để chạy\nscript mượt mà không cần nhập Key.",
+        TextColor3 = Color3.fromRGB(130, 240, 160),
+        TextSize = 12,
+        TextWrapped = true,
+        TextXAlignment = Enum.TextXAlignment.Center,
+        ZIndex = 202,
+        Parent = Card
+    })
+
     local LaunchBtn = New("TextButton", {
-        BackgroundColor3 = Color3.fromRGB(110, 45, 210),
+        BackgroundColor3 = Color3.fromRGB(120, 50, 220),
         BorderSizePixel = 0,
-        Position = UDim2.new(0, 15, 0, 85),
+        Position = UDim2.new(0, 15, 0, 110),
         Size = UDim2.new(1, -30, 0, 45),
         AutoButtonColor = false,
         Text = "",
@@ -175,7 +190,7 @@ local function ShowUI()
                 BackgroundTransparency = 1,
                 Size = UDim2.new(1, 0, 1, 0),
                 Font = Enum.Font.FredokaOne,
-                Text = "KÍCH HOẠT KD5 HUB",
+                Text = "KÍCH HOẠT SCRIPT",
                 TextColor3 = Color3.fromRGB(255, 255, 255),
                 TextSize = 14,
                 ZIndex = 203
